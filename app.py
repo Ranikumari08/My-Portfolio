@@ -10,7 +10,7 @@ def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="mysql password",
+        password="mysqlpassword",
         database="myinfo"
     )
 
@@ -152,5 +152,6 @@ def get_links():
 
 # main entry point
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    #app.run(host="0.0.0.0", port=10000)
+    app.run()
 
