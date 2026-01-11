@@ -7,10 +7,10 @@ CORS(app)  #allows all origin
 
 def get_db_connection():
     return mysql.connector.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_NAME")
+        host="localhost",
+        user="root",
+        password="rkRK@@##0803",
+        database="myinfo"
     )
 
 # health route
@@ -151,4 +151,4 @@ def get_links():
 
 # main entry point 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=10000)
