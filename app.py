@@ -151,4 +151,18 @@ def get_links():
 
     return jsonify(result), 200
 
-
+#root route
+@app.route("/")
+def home():
+    return jsonify({
+        "message": "My Portfolio API is running",
+        "endpoints": [
+            "/profile",
+            "/skills/top",
+            "/projects",
+            "/work",
+            "/education",
+            "/certifications",
+            "/health"
+        ]
+    })
