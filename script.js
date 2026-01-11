@@ -1,23 +1,18 @@
 const API_BASE = "https://my-portfolio-1-pes7.onrender.com";
 
-/* Utility function for fetch */
-async function fetchData(url, errorMessage) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(errorMessage);
-  return res.json();
-}
-
 /* ---------- PROFILE ---------- */
-fetchData(`${API_BASE}/profile`, "Failed to load profile")
+fetch(`${API_BASE}/profile`)
+  .then(res => res.json())
   .then(p => {
-    document.getElementById("name").innerText = p.name ?? "";
-    document.getElementById("email").innerText = p.email ?? "";
+    document.getElementById("name").innerText = p.Name || "";
+    document.getElementById("email").innerText = p.Email || "";
   })
   .catch(err => console.error("Profile error:", err));
 
 
 /* ---------- LINKS ---------- */
-fetchData(`${API_BASE}/links`, "Failed to load links")
+fetch(`${API_BASE}/links`)
+  .then(res => res.json())
   .then(l => {
     document.getElementById("github").href = l.github || "#";
     document.getElementById("linkedin").href = l.linkedin || "#";
@@ -27,7 +22,8 @@ fetchData(`${API_BASE}/links`, "Failed to load links")
 
 
 /* ---------- EDUCATION ---------- */
-fetchData(`${API_BASE}/education`, "Failed to load education")
+fetch(`${API_BASE}/education`)
+  .then(res => res.json())
   .then(data => {
     const ul = document.getElementById("education");
     ul.innerHTML = "";
@@ -46,20 +42,21 @@ fetchData(`${API_BASE}/education`, "Failed to load education")
 
 
 /* ---------- SKILLS ---------- */
-fetchData(`${API_BASE}/skills/top`, "Failed to load skills")
+fetch(`${API_BASE}/skills/top`)
+  .then(res => res.json())
   .then(skills => {
     const div = document.getElementById("skills");
     div.innerHTML = "";
-
-    skills.forEach(skill => {
-      div.innerHTML += `<span>${skill}</span>`;
+    skills.forEach(s => {
+      div.innerHTML += `<span>${s}</span>`;
     });
   })
   .catch(err => console.error("Skills error:", err));
 
 
 /* ---------- CERTIFICATIONS ---------- */
-fetchData(`${API_BASE}/certifications`, "Failed to load certifications")
+fetch(`${API_BASE}/certifications`)
+  .then(res => res.json())
   .then(data => {
     const ul = document.getElementById("certifications");
     ul.innerHTML = "";
@@ -77,29 +74,18 @@ fetchData(`${API_BASE}/certifications`, "Failed to load certifications")
 
 
 /* ---------- WORK EXPERIENCE ---------- */
-fetchData(`${API_BASE}/work`, "Failed to load work experience")
+fetch(`${API_BASE}/work`)
+  .then(res => res.json())
   .then(data => {
     const ul = document.getElementById("work");
     ul.innerHTML = "";
 
     data.forEach(w => {
-      const start = new Date(w.start_date).toLocaleDateString("en-US", {
-        month: "short",
-        year: "numeric"
-      });
-
-      const end = w.end_date
-        ? new Date(w.end_date).toLocaleDateString("en-US", {
-            month: "short",
-            year: "numeric"
-          })
-        : "Present";
-
       ul.innerHTML += `
         <li>
           <div class="work-role">${w.role}</div>
           <div class="work-company">${w.company}</div>
-          <div class="work-dates">${start} – ${end}</div>
+          <div class="work-dates">${w.start_date} – ${w.end_date || "Present"}</div>
           <div class="work-desc">${w.description}</div>
         </li>
       `;
@@ -108,8 +94,9 @@ fetchData(`${API_BASE}/work`, "Failed to load work experience")
   .catch(err => console.error("Work error:", err));
 
 
-/* ---------- PROJECTS ---------- */
-fetchData(`${API_BASE}/projects`, "Failed to load projects")
+/* ---------- PROJECTS (FIXED) ---------- */
+fetch(`${API_BASE}/projects`)
+  .then(res => res.json())
   .then(projects => {
     const ul = document.getElementById("projects");
     ul.innerHTML = "";
@@ -117,12 +104,12 @@ fetchData(`${API_BASE}/projects`, "Failed to load projects")
     projects.forEach(p => {
       ul.innerHTML += `
         <li class="project-item">
-          <div class="project-title">${p.title}</div>
-          <div class="project-tools">${p.tools}</div>
-          <div class="project-desc">${p.description}</div>
+          <div class="project-title">${p.Title}</div>
+          <div class="project-tools">${p.Tools}</div>
+          <div class="project-desc">${p.Description}</div>
           ${
-            p.link
-              ? `<a href="${p.link}" target="_blank" class="project-link">GitHub</a>`
+            p.Links
+              ? `<a href="${p.Links}" target="_blank" class="project-link">GitHub</a>`
               : ""
           }
         </li>

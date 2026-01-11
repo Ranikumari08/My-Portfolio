@@ -165,3 +165,16 @@ a {
   background: #f5c542;
   color: #111;
 }
+
+.profile-name {
+  font-size: 28px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-top: 12px;
+}
+
+.profile-role {
+  font-size: 18px;
+  color: #93c5fd;
+  margin-top: 4px;
+}
