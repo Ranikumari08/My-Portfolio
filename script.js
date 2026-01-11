@@ -1,24 +1,23 @@
 const API_BASE = "https://my-portfolio-1-pes7.onrender.com";
 
+/* Utility function for fetch */
+async function fetchData(url, errorMessage) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(errorMessage);
+  return res.json();
+}
+
 /* ---------- PROFILE ---------- */
-fetch(`${API_BASE}/profile`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load profile");
-    return res.json();
-  })
+fetchData(`${API_BASE}/profile`, "Failed to load profile")
   .then(p => {
-    document.getElementById("name").innerText = p.name || "";
-    document.getElementById("email").innerText = p.email || "";
+    document.getElementById("name").innerText = p.name ?? "";
+    document.getElementById("email").innerText = p.email ?? "";
   })
   .catch(err => console.error("Profile error:", err));
 
 
 /* ---------- LINKS ---------- */
-fetch(`${API_BASE}/links`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load links");
-    return res.json();
-  })
+fetchData(`${API_BASE}/links`, "Failed to load links")
   .then(l => {
     document.getElementById("github").href = l.github || "#";
     document.getElementById("linkedin").href = l.linkedin || "#";
@@ -28,11 +27,7 @@ fetch(`${API_BASE}/links`)
 
 
 /* ---------- EDUCATION ---------- */
-fetch(`${API_BASE}/education`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load education");
-    return res.json();
-  })
+fetchData(`${API_BASE}/education`, "Failed to load education")
   .then(data => {
     const ul = document.getElementById("education");
     ul.innerHTML = "";
@@ -51,11 +46,7 @@ fetch(`${API_BASE}/education`)
 
 
 /* ---------- SKILLS ---------- */
-fetch(`${API_BASE}/skills/top`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load skills");
-    return res.json();
-  })
+fetchData(`${API_BASE}/skills/top`, "Failed to load skills")
   .then(skills => {
     const div = document.getElementById("skills");
     div.innerHTML = "";
@@ -68,11 +59,7 @@ fetch(`${API_BASE}/skills/top`)
 
 
 /* ---------- CERTIFICATIONS ---------- */
-fetch(`${API_BASE}/certifications`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load certifications");
-    return res.json();
-  })
+fetchData(`${API_BASE}/certifications`, "Failed to load certifications")
   .then(data => {
     const ul = document.getElementById("certifications");
     ul.innerHTML = "";
@@ -90,11 +77,7 @@ fetch(`${API_BASE}/certifications`)
 
 
 /* ---------- WORK EXPERIENCE ---------- */
-fetch(`${API_BASE}/work`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load work experience");
-    return res.json();
-  })
+fetchData(`${API_BASE}/work`, "Failed to load work experience")
   .then(data => {
     const ul = document.getElementById("work");
     ul.innerHTML = "";
@@ -126,11 +109,7 @@ fetch(`${API_BASE}/work`)
 
 
 /* ---------- PROJECTS ---------- */
-fetch(`${API_BASE}/projects`)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load projects");
-    return res.json();
-  })
+fetchData(`${API_BASE}/projects`, "Failed to load projects")
   .then(projects => {
     const ul = document.getElementById("projects");
     ul.innerHTML = "";
