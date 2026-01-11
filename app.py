@@ -5,12 +5,13 @@ import os
 app = Flask(__name__)
 CORS(app)  #allows all origin 
 
+# databse connection
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="rkRK@@##0803",
-        database="myinfo"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
 
 # health route
@@ -149,6 +150,4 @@ def get_links():
 
     return jsonify(result), 200
 
-# main entry point 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+
