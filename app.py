@@ -1,17 +1,16 @@
 from flask import Flask, jsonify, request
 import mysql.connector
 from flask_cors import CORS  #allows backedn API to be accessed at frontend
-
+import os
 app = Flask(__name__)
 CORS(app)  #allows all origin 
 
-# database connection
 def get_db_connection():
     return mysql.connector.connect(
-        DB_HOST="localhost",
-        DB_USER="root",
-        DB_PASSWORD="mysqlpassword",
-        DB_NAME="myinfo"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
 
 # health route
@@ -151,8 +150,5 @@ def get_links():
     return jsonify(result), 200
 
 # main entry point 
-"""
 if __name__ == "__main__":
-    #app.run(host="0.0.0.0", port=10000)
-    app.run()
-"""
+    app.run(host="0.0.0.0", debug=True)
