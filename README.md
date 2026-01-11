@@ -8,7 +8,7 @@ Backend API
 Health Check
 👉 https://my-portfolio-1-pes7.onrender.com/health
 GitHub Repo
-👉 (add your repo link here)
+👉 https://github.com/Ranikumari08/My-Portfolio
 
 📄 Resume
 📌 Resume Link:
