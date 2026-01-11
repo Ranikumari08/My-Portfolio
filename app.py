@@ -26,7 +26,7 @@ def health():
 def get_tables():
     db = get_db_connection()    #creating connection to database
     cursor = db.cursor()
-    cursor.execute("SHOW TABLES;")
+    cursor.execute("SHOW TABLES FROM myinfo;")
     tables = cursor.fetchall()
     cursor.close()
     db.close()
@@ -40,7 +40,7 @@ def get_tables():
 def get_profile():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM profile LIMIT 1;")
+    cursor.execute("SELECT * FROM myinfo.profile LIMIT 1;")
     profile = cursor.fetchone()
     cursor.close()
     db.close()
@@ -52,7 +52,7 @@ def get_profile():
 def get_skills():
     db = get_db_connection()
     cursor = db.cursor()
-    cursor.execute("SELECT skill FROM skills;")
+    cursor.execute("SELECT skill FROM myinfo.skills;")
     skills = [row[0] for row in cursor.fetchall()]
     cursor.close()
     db.close()
@@ -70,13 +70,13 @@ def get_projects():
     if skill:
         query = """
         SELECT DISTINCT p.*
-        FROM projects p
-        JOIN skills s ON p.profile_id = s.profile_id
+        FROM myinfo.projects p
+        JOIN myinfo.skills s ON p.profile_id = s.profile_id
         WHERE s.skill = %s;
         """
         cursor.execute(query, (skill,))
     else:
-        cursor.execute("SELECT * FROM projects;")
+        cursor.execute("SELECT * FROM myinfo.projects;")
 
     projects = cursor.fetchall()
     cursor.close()
@@ -90,7 +90,7 @@ def get_education():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
     cursor.execute("""
-        SELECT * FROM education
+        SELECT * FROM myinfo.education
         ORDER BY start_year DESC;
     """)
     education = cursor.fetchall()
@@ -105,7 +105,7 @@ def get_certifications():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
     cursor.execute("""
-        SELECT * FROM certifications
+        SELECT * FROM myinfo.certifications
         ORDER BY year DESC;
     """)
     certifications = cursor.fetchall()
@@ -119,7 +119,7 @@ def get_certifications():
 def get_work():
     db = get_db_connection()
     cursor = db.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM work;")
+    cursor.execute("SELECT * FROM myinfo.work;")
     work = cursor.fetchall()
     cursor.close()
     db.close()
@@ -133,7 +133,7 @@ def get_links():
 
     query = """
         SELECT github, linkedin, portfolio
-        FROM links
+        FROM myinfo.links
         WHERE profile_id = 1
         LIMIT 1
     """
