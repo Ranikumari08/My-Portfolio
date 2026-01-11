@@ -3,6 +3,7 @@ A RESTful Portfolio API built with Python + Flask + MySQL, deployed on Render, u
 This backend serves portfolio data for a frontend/UI and is fully production-ready.
 
 🚀 Live URLs
+Portfolio UI Hosted Live Link- https://ranikumari08.github.io/My-Portfolio/
 Backend API
 👉 https://my-portfolio-1-pes7.onrender.com
 Health Check
