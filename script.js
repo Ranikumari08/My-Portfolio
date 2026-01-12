@@ -74,18 +74,34 @@ fetch(`${API_BASE}/certifications`)
 
 
 /* ---------- WORK EXPERIENCE ---------- */
+/* ---------- WORK EXPERIENCE ---------- */
 fetch(`${API_BASE}/work`)
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to load work experience");
+    return res.json();
+  })
   .then(data => {
     const ul = document.getElementById("work");
     ul.innerHTML = "";
 
     data.forEach(w => {
+      const formatDate = (dateStr) => {
+        if (!dateStr) return "Present";
+        const d = new Date(dateStr);
+        return d.toLocaleDateString("en-US", {
+          month: "short",
+          year: "numeric"
+        });
+      };
+
+      const start = formatDate(w.start_date);
+      const end = formatDate(w.end_date);
+
       ul.innerHTML += `
         <li>
           <div class="work-role">${w.role}</div>
           <div class="work-company">${w.company}</div>
-          <div class="work-dates">${w.start_date} – ${w.end_date || "Present"}</div>
+          <div class="work-dates">${start} – ${end}</div>
           <div class="work-desc">${w.description}</div>
         </li>
       `;
@@ -93,7 +109,7 @@ fetch(`${API_BASE}/work`)
   })
   .catch(err => console.error("Work error:", err));
 
-
+  
 /* ---------- PROJECTS (FIXED) ---------- */
 fetch(`${API_BASE}/projects`)
   .then(res => res.json())
