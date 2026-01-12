@@ -1,6 +1,6 @@
 const API_BASE = "https://my-portfolio-1-pes7.onrender.com";
 
-/* ---------- PROFILE ---------- */
+/* fetching profile */
 fetch(`${API_BASE}/profile`)
   .then(res => res.json())
   .then(p => {
@@ -10,7 +10,7 @@ fetch(`${API_BASE}/profile`)
   .catch(err => console.error("Profile error:", err));
 
 
-/* ---------- LINKS ---------- */
+/* fetch links */
 fetch(`${API_BASE}/links`)
   .then(res => res.json())
   .then(l => {
@@ -21,7 +21,7 @@ fetch(`${API_BASE}/links`)
   .catch(err => console.error("Links error:", err));
 
 
-/* ---------- EDUCATION ---------- */
+/* fetch education */
 fetch(`${API_BASE}/education`)
   .then(res => res.json())
   .then(data => {
@@ -41,7 +41,7 @@ fetch(`${API_BASE}/education`)
   .catch(err => console.error("Education error:", err));
 
 
-/* ---------- SKILLS ---------- */
+/* fetch skills */
 fetch(`${API_BASE}/skills/top`)
   .then(res => res.json())
   .then(skills => {
@@ -54,7 +54,7 @@ fetch(`${API_BASE}/skills/top`)
   .catch(err => console.error("Skills error:", err));
 
 
-/* ---------- CERTIFICATIONS ---------- */
+/* fetch certifications */
 fetch(`${API_BASE}/certifications`)
   .then(res => res.json())
   .then(data => {
@@ -72,9 +72,7 @@ fetch(`${API_BASE}/certifications`)
   })
   .catch(err => console.error("Certifications error:", err));
 
-
-/* ---------- WORK EXPERIENCE ---------- */
-/* ---------- WORK EXPERIENCE ---------- */
+/* fetch work*/
 fetch(`${API_BASE}/work`)
   .then(res => {
     if (!res.ok) throw new Error("Failed to load work experience");
@@ -110,7 +108,7 @@ fetch(`${API_BASE}/work`)
   .catch(err => console.error("Work error:", err));
 
   
-/* ---------- PROJECTS (FIXED) ---------- */
+/* fetch project */
 fetch(`${API_BASE}/projects`)
   .then(res => res.json())
   .then(projects => {
